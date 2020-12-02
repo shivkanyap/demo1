@@ -4,6 +4,9 @@ const router=express.Router()
 const Addmision=require('../model/Addmission-Register')
 const {authenticateUser}=require('../middleware/authentication')
 
+
+
+
 router.get('/',authenticateUser,function(req,res){
 
     // const {user}=req
@@ -41,6 +44,54 @@ router.post('/',authenticateUser,function(req,res){
     .catch(err => res.json(err))
     console.log(body)
     // res.send('registration ')
+})
+
+router.put('/:id',authenticateUser,(req,res)=>{
+    const id=req.params.id
+    const body = req.body
+    Addmision.findOneAndUpdate(
+        {
+        _id:id,
+        user:req.user._id},
+        // {$set:body},
+        // {new:true,
+        // runValidators:true}
+        )
+        .then((admission)=>{
+            if(!contact)
+            {
+                res.json({ })
+            }
+            res.json(contact)
+        })
+        .catch((err)=>{
+            res.json(err)
+        })   
+
+})
+
+router.delete('/:id',authenticateUser,(req,res)=>{
+    const id=req.params.id
+    Addmision.findOneAndDelete({
+        _id:id,
+        user:req.user_id
+    })
+    .then((admission)=>{
+        if(!admission)
+        {
+            res.json({})
+        }
+        res.json(admission)
+    })
+
+    .catch((err)=>{
+        res.json(err)
+    }
+)
+
+
+
+
 })
 
 module.exports= router

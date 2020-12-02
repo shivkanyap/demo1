@@ -43,6 +43,7 @@ router.get('/account',authenticateUser, function(req,res){
     res.send(user)
     
 })
+
 router.delete('/logout',authenticateUser,function(req,res){
     const {user,token}=req
     User.findByIdAndUpdate(user._id,{$pull:{tokens:{token:token}}})
@@ -53,6 +54,7 @@ router.delete('/logout',authenticateUser,function(req,res){
         res.send(err)
     })
 })
+
 //     User.findOne({email:body.email})
 //         .then(function(user){
 //             if(!user)

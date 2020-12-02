@@ -31,6 +31,7 @@ const UserSchema=new Schema({
         minlength:5,
         maxlength:128
     },
+
     tokens:[
         {
             token:{
@@ -41,7 +42,16 @@ const UserSchema=new Schema({
                 default:Date.now
             }
         }
-    ]
+    ],
+    roles: {
+        type:String,
+        
+
+    },
+    allowAcess:{
+        type:Boolean,
+        default:true
+    }
 })
 
 
